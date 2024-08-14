@@ -38,6 +38,12 @@
 .res {
 	background-color: #c7f5d4;
 }
+
+.result {
+	background-color: rgb(94, 255, 94);
+	color: rgb(1, 47, 1);
+}
+
 .clear {
 	background-color: #e00606;
 	color: #999;

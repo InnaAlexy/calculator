@@ -7,6 +7,7 @@ export const App = () => {
 	const [operand1, setOperand1] = useState('');
 	const [operand2, setOperand2] = useState('');
 	const [operator, setOperator] = useState('');
+	const [itIsResult, setItIsResult] = useState(false);
 
 	const displayValue = operand1 + operator + operand2;
 
@@ -25,6 +26,10 @@ export const App = () => {
 	};
 
 	const handleClick = (item) => {
+		if (itIsResult) {
+			setItIsResult(false);
+		}
+
 		if (operand1 === '') {
 			setOperand1(item);
 		} else if (!operator && operand1[0] === '0') {
@@ -37,12 +42,14 @@ export const App = () => {
 	};
 
 	const hendleOperator = (op) => {
+		setItIsResult(false);
 		if (operator === '') {
 			setOperator(op);
 		}
 	};
 
 	const hendleSet = () => {
+		setItIsResult(true);
 		// eslint-disable-next-line default-case
 		switch (operator) {
 			case '+':
@@ -59,13 +66,23 @@ export const App = () => {
 	};
 
 	const cleanAll = () => {
+		if (itIsResult) {
+			setItIsResult(false);
+		}
 		setOperand1('0');
 		setOperand2('');
 		setOperator('');
 	};
 	return (
 		<div className={styles.container}>
-			<div className={styles.display}> {displayValue} </div>
+			<div
+				className={
+					!itIsResult ? styles.display : `${styles.display} ${styles.result}`
+				}
+			>
+				{' '}
+				{displayValue}{' '}
+			</div>
 
 			<div className={styles.buttons}>
 				{buttonList()}
